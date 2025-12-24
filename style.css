@@ -1,0 +1,131 @@
+/* style.css - O Design Global do Help CLT */
+:root {
+    --primary: #0284c7; /* Azul CLT */
+    --secondary: #7c3aed; /* Roxo PJ */
+    --accent: #f97316;  /* Laranja Ação */
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #334155;
+    --border: #e2e8f0;
+}
+
+/* ========================================= */
+/* 1. ESTRUTURA BASE (Para todos)            */
+/* ========================================= */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    /* Aqui removemos o bloqueio de centralização vertical */
+    display: block; 
+    min-height: 100vh;
+}
+
+/* O Container Principal */
+.container {
+    background-color: var(--card);
+    width: 100%;
+    /* No celular, ele ocupa quase tudo e tem margem pequena */
+    max-width: 95%; 
+    margin: 20px auto; 
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+
+/* ========================================= */
+/* 2. MÁGICA DO COMPUTADOR (Media Query)     */
+/* ========================================= */
+/* Se a tela for maior que 768px (Tablets e PCs) */
+@media (min-width: 768px) {
+    .container {
+        /* O container cresce para caber os 3 artigos */
+        max-width: 1100px; 
+        padding: 40px;
+    }
+
+    /* Mas a calculadora não pode ficar gigante, senão fica feio.
+       Então a gente restringe só a área de inputs no PC */
+    .calculator-area, .header, .result-box, .home-container, .logo-area {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Na Home, os botões ficam lado a lado no PC */
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+/* ========================================= */
+/* 3. ESTILOS GERAIS (Botões, Inputs, etc)   */
+/* ========================================= */
+
+h1, h2 { margin: 0; }
+
+.form-group { margin-bottom: 18px; padding: 0 20px; }
+label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #475569; text-align: left; }
+input, select { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: 0.3s; }
+input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+/* Botões */
+.btn-calc { width: calc(100% - 40px); margin-left: 20px; padding: 16px; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.btn-clt { background-color: var(--primary); }
+.btn-clt:hover { background-color: #0369a1; }
+.btn-pj { background-color: var(--secondary); }
+.btn-pj:hover { background-color: #6d28d9; }
+
+/* Botões da Home */
+.nav-buttons { margin: 30px 0; display: flex; flex-direction: column; gap: 15px; padding: 0 20px; }
+.big-btn { display: flex; align-items: center; justify-content: center; padding: 20px; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 18px; transition: transform 0.2s; color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.big-btn:hover { transform: translateY(-3px); }
+.btn-clt-home { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); }
+.btn-pj-home { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+.btn-icon { font-size: 24px; margin-right: 10px; }
+
+/* Resultados */
+.result-box { display: none; background-color: #f1f5f9; margin: 20px; padding: 20px; border-radius: 12px; border: 1px solid #cbd5e1; animation: fadeIn 0.5s; }
+.result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; color: #64748b; }
+.result-total { display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 2px solid #cbd5e1; font-weight: 800; font-size: 18px; color: #0f172a; }
+.total-clt { color: var(--primary); }
+.total-pj { color: var(--secondary); }
+.footer-note { text-align: center; font-size: 12px; color: #94a3b8; padding: 20px; }
+
+/* Animações */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ========================================= */
+/* 4. ESTILOS DOS ARTIGOS (Cards)            */
+/* ========================================= */
+
+.articles-section { margin-top: 50px; margin-bottom: 50px; }
+.section-title { text-align: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 30px; }
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 20px; }
+
+.article-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column; height: 100%; text-decoration: none;
+    box-sizing: border-box; /* Garante que o padding não estoure o tamanho */
+}
+
+.article-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); border-color: var(--secondary); }
+.article-card h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.25rem; line-height: 1.4; }
+.article-card p { color: #64748b; font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 20px; }
+.article-read-more { color: var(--secondary); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Responsividade extra para celular */
+@media (max-width: 600px) {
+    .articles-grid { grid-template-columns: 1fr; }
+}

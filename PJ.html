@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6279868140097433"
+     crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JZ46H6FJ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0JZ46H6FJ3');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área PJ | Help CLT</title>
+    <meta name="description" content="Calculadora de Salário Líquido para PJ (Simples Nacional). Descubra o desconto real de impostos, entenda o Fator R e saiba se vale a pena virar PJ.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Ajustes locais para a tag PJ e cabeçalho */
+        .header { background-color: #fff; padding: 20px; text-align: center; }
+        .back-link { display: block; text-align: left; color: var(--secondary); text-decoration: none; font-weight: 600; margin-bottom: 15px; font-size: 14px;}
+        h1 { color: var(--secondary); font-size: 24px; font-weight: 800; margin-bottom: 5px;}
+        .pj-tag {background-color: #ede9fe; color: var(--secondary); font-size: 12px; padding: 4px 8px; border-radius: 12px; font-weight: bold; display: inline-block; margin-bottom: 20px;}
+        
+        /* Garante que o input da calculadora fique centralizado na tela grande */
+        .calculator-area { width: 100%; }
+    </style>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png"> <link rel="apple-touch-icon" href="favicon.png">
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <a href="index.html" class="back-link">← Voltar para Início</a>
+            <h1>Área PJ</h1>
+            <span class="pj-tag">Simples Nacional</span>
+        </div>
+
+        <div class="calculator-area" style="padding: 30px 20px;">
+            <div class="form-group">
+                <label>Faturamento Mensal (R$)</label>
+                <input type="number" id="faturamentoPJ" placeholder="Ex: 7000.00">
+            </div>
+            <button class="btn-calc btn-pj" onclick="calcularPJ()">Calcular Líquido</button>
+            
+            <div id="res-pj" class="result-box">
+                <div class="result-row" style="color: #dc2626;"><span>Imposto Total (Est.):</span><span id="pj-imposto">- R$ 0,00</span></div>
+                <div class="result-total total-pj"><span>LÍQUIDO ESTIMADO:</span><span id="pj-total">R$ 0,00</span></div>
+            </div>
+        </div>
+
+        <section class="articles-section">
+            <h2 class="section-title">Guia Essencial para PJs</h2>
+            <div class="articles-grid">
+
+                <a href="artigo-pj-fator-r.html" class="article-card" style="border-left: 4px solid var(--secondary);">
+                    <h3>O que é o Fator R? (Simples Nacional)</h3>
+                    <p>Descubra o segredo matemático para pagar 6% de imposto em vez de 15,5% legalmente.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+                <a href="artigo-pj-contrato.html" class="article-card">
+                    <h3>Contrato PJ: O que não pode faltar?</h3>
+                    <p>4 pontos essenciais para proteger sua empresa e evitar dores de cabeça no futuro.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+                <a href="artigo-pj-direitos.html" class="article-card">
+                    <h3>PJ tem direitos trabalhistas?</h3>
+                    <p>Entenda a verdade sobre férias, 13º e rescisão na relação B2B e como se planejar.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="index.html" class="back-link" style="display: inline-block;">← Voltar para o Início</a>
+            </div>
+        </section>
+
+        <div class="footer-note" style="margin-top: 40px;">
+    © 2025 Help CLT • <a href="politica.html" style="color:inherit;">Privacidade</a> • <a href="contato.html" style="color:inherit;">Contato</a>
+</div>
+
+    <script>
+        function formatar(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+        function calcularPJ() {
+            let fat = parseFloat(document.getElementById('faturamentoPJ').value);
+            if (isNaN(fat)) { alert("Digite o faturamento!"); return; }
+            let taxa = fat > 15000 ? 0.11 : 0.06; // Estimativa simples
+            let inss = 155.32; // INSS fixo sobre mínimo
+            let impostoTotal = (fat * taxa) + inss;
+            document.getElementById('pj-imposto').innerText = "- " + formatar(impostoTotal);
+            document.getElementById('pj-total').innerText = formatar(fat - impostoTotal);
+            document.getElementById('res-pj').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

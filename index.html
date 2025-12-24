@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6279868140097433"
+     crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JZ46H6FJ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0JZ46H6FJ3');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help CLT | O Portal do Trabalhador</title>
+    <meta name="description" content="Calculadora trabalhista completa e gratuita (2025). Calcule Rescisão, Férias, Décimo Terceiro e compare salário CLT vs PJ. Tire suas dúvidas sobre direitos trabalhistas de forma simples.">
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* Estilos EXCLUSIVOS da Home que não estão no style.css global */
+        
+        .main-logo {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        /* Animação de Carregamento (Spinner) */
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg); display: flex; justify-content: center; align-items: center;
+            z-index: 999; transition: opacity 0.5s;
+        }
+        .spinner {
+            width: 40px; height: 40px; border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon.png"> <link rel="apple-touch-icon" href="favicon.png">
+</head>
+<body>
+    <div id="loading-screen"><div class="spinner"></div></div>
+
+    <div class="container home-container">
+       <div class="logo-area" style="text-align: center; margin-bottom: 30px;">
+            <img src="logo.jpg" alt="Logo Help CLT - Cálculos Precisos" class="main-logo">
+       </div>
+
+        <div class="nav-buttons">
+            <a href="clt.html" class="big-btn btn-clt-home">
+                <span class="btn-icon">💼</span> Área CLT
+            </a>
+            <a href="pj.html" class="big-btn btn-pj-home">
+                <span class="btn-icon">🚀</span> Área PJ
+            </a>
+        </div>
+
+        <section class="articles-section">
+            <h2 class="section-title">Dúvidas Frequentes (CLT)</h2>
+            <div class="articles-grid">
+
+                <a href="artigo-clt-ferias.html" class="article-card">
+                    <h3>5 Dúvidas Comuns sobre Férias</h3>
+                    <p>Quem escolhe a data? Posso vender 10 dias? Entenda o que diz a lei sobre o seu descanso.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+                <a href="artigo-clt-pedir-demissao.html" class="article-card">
+                    <h3>Pedi Demissão: O que eu recebo?</h3>
+                    <p>Veja quais verbas você tem direito ao sair da empresa por conta própria e o que você perde.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+                <a href="artigo-clt-demissao.html" class="article-card">
+                    <h3>Fui Demitido: Meus Direitos</h3>
+                    <p>Guia completo sobre multa de 40%, saque do FGTS e seguro-desemprego na demissão sem justa causa.</p>
+                    <span class="article-read-more">Ler Artigo →</span>
+                </a>
+
+            </div>
+        </section>
+
+        <div class="footer-note" style="margin-top: 40px;">
+    © 2025 Help CLT • <a href="politica.html" style="color:inherit;">Privacidade</a> • <a href="contato.html" style="color:inherit;">Contato</a>
+</div>
+    </div>
+
+    <script>
+        // Simula um carregamento rápido
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var loader = document.getElementById('loading-screen');
+                if(loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(function(){ loader.style.display = 'none'; }, 500);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

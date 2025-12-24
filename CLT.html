@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6279868140097433"
+     crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JZ46H6FJ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0JZ46H6FJ3');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora CLT Completa: Calcule Rescisão, Férias Líquidas com venda de dias, 13º Salário e descontos de INSS/IRRF. Atualizado 2025.">
+    
+    <title>Área CLT | Help CLT</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Estilos específicos das Abas internas */
+        .header { background-color: #fff; padding: 20px 20px 0 20px; text-align: center; }
+        .back-link { display: block; text-align: left; color: var(--primary); text-decoration: none; font-weight: 600; margin-bottom: 15px; font-size: 14px;}
+        h1 { color: var(--primary); font-size: 24px; font-weight: 800; margin-bottom: 20px;}
+        .tabs { display: flex; border-bottom: 2px solid var(--border); }
+        .tab-btn { flex: 1; padding: 15px; border: none; background: none; font-weight: 600; color: #64748b; cursor: pointer; border-bottom: 3px solid transparent; }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background-color: #f0f9ff; }
+        .tab-content { display: none; padding: 30px 0; animation: fadeIn 0.4s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* ESTILOS DA CAIXA DE RESULTADO (Centralizada) */
+        .result-box {
+            display: none; /* Começa oculto */
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px auto 0 auto; /* Centraliza horizontalmente */
+            width: 92%; /* Largura um pouco menor que a tela */
+            max-width: 400px; /* Não fica gigante em PC */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .detalhe-row { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 8px; 
+            font-size: 14px; 
+            color: #64748b; 
+            border-bottom: 1px dashed #e2e8f0; /* Linha pontilhada para guiar o olho */
+            padding-bottom: 4px;
+        }
+        .detalhe-row:last-of-type { border-bottom: none; }
+        .detalhe-valor { font-weight: 600; color: #334155; }
+
+        /* Total com destaque */
+        .total-clt {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #cbd5e1;
+            text-align: center; /* Centraliza o texto do total */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .total-clt span:first-child { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; }
+        #v-total, #f-total {
+            font-size: 26px; /* Valor Grande */
+            color: var(--primary);
+            font-weight: 800;
+            margin-top: 5px;
+        }
+    </style>
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png"> 
+    <link rel="apple-touch-icon" href="favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← Voltar para Início</a>
+            <h1>Área CLT</h1>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('rescisao', this)">Rescisão</button>
+                <button class="tab-btn" onclick="openTab('ferias', this)">Férias</button>
+            </div>
+        </div>
+
+        <div id="rescisao" class="tab-content active">
+            <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="salario" placeholder="Ex: 2500.00"></div>
+            <div class="form-group"><label>Admissão</label><input type="date" id="dataInicio"></div>
+            <div class="form-group"><label>Saída</label><input type="date" id="dataFim"></div>
+            <div class="form-group"><label>Motivo</label>
+                <select id="motivo">
+                    <option value="semJustaCausa">Demissão sem Justa Causa</option>
+                    <option value="pedidoDemissao">Pedido de Demissão</option>
+                    <option value="justaCausa">Justa Causa</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Férias Vencidas?</label>
+                <select id="feriasVencidas"><option value="nao">Não</option><option value="sim">Sim (1 ano)</option></select>
+            </div>
+            <button class="btn-calc btn-clt" onclick="calcularRescisao()">Calcular Rescisão</button>
+            
+            <div id="res-clt" class="result-box">
+                <div class="detalhe-row"><span>Saldo Salário</span><span id="r-saldo" class="detalhe-valor">R$ 0,00</span></div>
+                <div class="detalhe-row"><span>13º Proporcional</span><span id="r-13" class="detalhe-valor">R$ 0,00</span></div>
+                <div class="detalhe-row"><span>Férias + 1/3</span><span id="r-ferias" class="detalhe-valor">R$ 0,00</span></div>
+                <div class="detalhe-row"><span>Aviso Prévio (Est.)</span><span id="r-aviso" class="detalhe-valor">R$ 0,00</span></div>
+                <div class="detalhe-row"><span>Multa FGTS (40%)</span><span id="r-multa" class="detalhe-valor">R$ 0,00</span></div>
+                
+                <div class="result-total total-clt">
+                    <span>Total Estimado</span>
+                    <span id="v-total">R$ 0,00</span>
+                </div>
+                <small style="display:block; text-align:center; color:#94a3b8; margin-top:10px; font-size:11px;">*Valores brutos aproximados. Ver detalhes exatos no holerite.</small>
+            </div>
+        </div>
+
+        <div id="ferias" class="tab-content">
+            <div style="background-color: #f0f9ff; padding: 15px; margin: 0 20px 20px 20px; border-radius: 8px; border: 1px solid #bae6fd;">
+                <p style="margin: 0; font-size: 13px; color: #0369a1; text-align: center;">Simule o valor <strong>Líquido</strong> (o que cai na conta) das suas férias.</p>
+            </div>
+            <div class="form-group"><label>Salário Bruto (R$)</label><input type="number" id="salarioFerias" placeholder="Ex: 3000.00"></div>
+            <div class="form-group"><label>Vai vender 10 dias? (Abono)</label>
+                <select id="venderFerias">
+                    <option value="nao">Não (Tirar 30 dias)</option>
+                    <option value="sim">Sim (Tirar 20 e vender 10)</option>
+                </select>
+            </div>
+            <button class="btn-calc btn-clt" onclick="calcularFerias()">Calcular Líquido</button>
+            
+            <div id="res-ferias-calc" class="result-box">
+                <div class="detalhe-row"><span>Bruto Tributável</span><span id="f-bruto" class="detalhe-valor">R$ 0,00</span></div>
+                
+                <div class="detalhe-row" id="row-abono" style="display:none;">
+                    <span>+ Venda 10 dias (Isento)</span>
+                    <span id="f-abono" class="detalhe-valor" style="color:var(--accent)">R$ 0,00</span>
+                </div>
+
+                <div class="detalhe-row" style="color: #ef4444;"><span>- INSS Estimado</span><span id="f-inss" class="detalhe-valor">R$ 0,00</span></div>
+                <div class="detalhe-row" style="color: #ef4444;"><span>- IRRF Estimado</span><span id="f-irrf" class="detalhe-valor">R$ 0,00</span></div>
+
+                <div class="result-total total-clt">
+                    <span>LÍQUIDO ESTIMADO</span>
+                    <span id="f-total">R$ 0,00</span>
+                </div>
+                <p class="footer-note" style="text-align:center;">*Cálculo com tabelas de 2025.</p>
+            </div>
+        </div>
+
+        <div class="footer-note" style="margin-top: 40px;">
+            © 2025 Help CLT • <a href="politica.html" style="color:inherit;">Privacidade</a> • <a href="contato.html" style="color:inherit;">Contato</a>
+        </div>
+    </div>
+
+    <script>
+        function formatar(v) { return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+        
+        function openTab(t,b){
+            var c=document.getElementsByClassName("tab-content");
+            for(var i=0;i<c.length;i++){c[i].style.display="none";c[i].classList.remove("active")}
+            var bt=document.getElementsByClassName("tab-btn");
+            for(var i=0;i<bt.length;i++){bt[i].classList.remove("active")}
+            document.getElementById(t).style.display="block";
+            b.classList.add("active")
+        }
+
+        function calcularRescisao(){
+            let s=parseFloat(document.getElementById('salario').value);
+            let i=new Date(document.getElementById('dataInicio').value);
+            let f=new Date(document.getElementById('dataFim').value);
+            let m=document.getElementById('motivo').value;
+            let tf=document.getElementById('feriasVencidas').value==='sim';
+
+            if(isNaN(s)||!document.getElementById('dataInicio').value||!document.getElementById('dataFim').value){
+                alert("Preencha todos os campos!"); return;
+            }
+
+            let mesesTrab = (f.getFullYear() - i.getFullYear()) * 12 + (f.getMonth() - i.getMonth());
+            let diasMesFim = f.getDate();
+            
+            let saldoSalario = (s/30) * diasMesFim;
+
+            let mesesAnoAtual = f.getMonth() + 1; 
+            if (diasMesFim < 15) mesesAnoAtual -= 1;
+            let decimoTerceiro = (s/12) * mesesAnoAtual;
+
+            let mesesFerias = mesesAnoAtual;
+            let feriasProp = (s/12) * mesesFerias;
+            let umTerco = feriasProp / 3;
+            let totalFerias = feriasProp + umTerco;
+
+            if(tf) totalFerias += (s + (s/3));
+
+            let aviso = 0;
+            let multa = 0;
+
+            if(m === 'semJustaCausa'){
+                let anos = f.getFullYear() - i.getFullYear();
+                let diasAviso = 30 + (anos * 3);
+                if(diasAviso > 90) diasAviso = 90;
+                aviso = (s/30) * diasAviso;
+                let saldoFGTSEstimado = (s * 0.08) * mesesTrab;
+                multa = saldoFGTSEstimado * 0.40;
+            } else if (m === 'pedidoDemissao') {
+                aviso = 0; 
+                multa = 0;
+            } else if (m === 'justaCausa') {
+                decimoTerceiro = 0;
+                totalFerias = 0;
+                if(tf) totalFerias = s + (s/3);
+                aviso = 0;
+                multa = 0;
+            }
+
+            document.getElementById('r-saldo').innerText = formatar(saldoSalario);
+            document.getElementById('r-13').innerText = formatar(decimoTerceiro);
+            document.getElementById('r-ferias').innerText = formatar(totalFerias);
+            document.getElementById('r-aviso').innerText = formatar(aviso);
+            document.getElementById('r-multa').innerText = formatar(multa);
+            
+            document.getElementById('v-total').innerText = formatar(saldoSalario+decimoTerceiro+totalFerias+aviso+multa);
+            document.getElementById('res-clt').style.display='block';
+        }
+
+        // CÁLCULO DE FÉRIAS LÍQUIDAS
+        function calcularFerias() {
+            let salario = parseFloat(document.getElementById('salarioFerias').value);
+            let vender = document.getElementById('venderFerias').value === 'sim';
+            
+            if (isNaN(salario)) { alert("Digite o salário!"); return; }
+            
+            // Definição dos dias
+            let diasDescanso = vender ? 20 : 30;
+            
+            // 1. Parte Tributável (Os dias que você fica em casa)
+            let valorDiasDescanso = (salario / 30) * diasDescanso;
+            let umTercoDescanso = valorDiasDescanso / 3;
+            let baseCalculoImposto = valorDiasDescanso + umTercoDescanso;
+            
+            // 2. Parte Isenta (O abono pecuniário - "Venda")
+            let valorAbono = 0;
+            let umTercoAbono = 0;
+            
+            // Esconde ou Mostra a linha do Abono na tela
+            let rowAbono = document.getElementById('row-abono');
+            if (vender) {
+                valorAbono = (salario / 30) * 10;
+                umTercoAbono = valorAbono / 3;
+                if(rowAbono) {
+                    rowAbono.style.display = 'flex';
+                    document.getElementById('f-abono').innerText = formatar(valorAbono + umTercoAbono);
+                }
+            } else {
+                if(rowAbono) rowAbono.style.display = 'none';
+            }
+
+            // Exibe o Bruto Tributável na tela
+            document.getElementById('f-bruto').innerText = formatar(baseCalculoImposto);
+
+            // 3. Cálculo dos Descontos (Só incide sobre a Base Tributável!)
+            
+            // INSS (Tabela Progressiva 2025)
+            let inss = 0;
+            let baseINSS = baseCalculoImposto; 
+            
+            if (baseINSS <= 1412.00) inss = baseINSS * 0.075;
+            else if (baseINSS <= 2666.68) inss = (1412 * 0.075) + ((baseINSS - 1412) * 0.09);
+            else if (baseINSS <= 4000.03) inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((baseINSS - 2666.68) * 0.12);
+            else if (baseINSS <= 7786.02) inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((4000.03 - 2666.68) * 0.12) + ((baseINSS - 4000.03) * 0.14);
+            else inss = (1412 * 0.075) + ((2666.68 - 1412) * 0.09) + ((4000.03 - 2666.68) * 0.12) + ((7786.02 - 4000.03) * 0.14);
+
+            // IRRF
+            let baseIR = baseCalculoImposto - inss; // Deduz INSS
+            let irrf = 0;
+            if (baseIR <= 2259.20) irrf = 0;
+            else if (baseIR <= 2826.65) irrf = (baseIR * 0.075) - 169.44;
+            else if (baseIR <= 3751.05) irrf = (baseIR * 0.15) - 381.44;
+            else if (baseIR <= 4664.68) irrf = (baseIR * 0.225) - 662.77;
+            else irrf = (baseIR * 0.275) - 896.00;
+
+            // Atualiza a tela com os descontos
+            document.getElementById('f-inss').innerText = "- " + formatar(inss);
+            document.getElementById('f-irrf').innerText = "- " + formatar(irrf);
+
+            // 4. TOTAL FINAL (Líquido Tributável + Abono Isento)
+            let totalLiquido = (baseCalculoImposto - inss - irrf) + (valorAbono + umTercoAbono);
+            
+            document.getElementById('f-total').innerText = formatar(totalLiquido);
+            document.getElementById('res-ferias-calc').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
